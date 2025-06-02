@@ -1,0 +1,18 @@
+.button-group {
+  margin-top: 20px;
+}
+
+.nav-button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  font-size: 1rem;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  background-color: #3498db;
+}
