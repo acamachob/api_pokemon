@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import Register from './pages/Register';
 import RecoverPassword from './pages/RecoverPassword';
 import PokemonPage from './views/PokemonPage';

@@ -1,30 +1,8 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import useLogin from "./useLogin";
 const Login = () => {
-  const [correo, setCorreo] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetch(
-        "https://68519cf68612b47a2c0ab990.mockapi.io/pokeusers/v1/users"
-      );
-      const users = await response.json();
-      const user = users.find(
-        (u) => u.correo === correo && u.contraseña === password
-      );
-      if (user) {
-        localStorage.setItem("auth", JSON.stringify(user));
-        navigate("/1");
-      } else {
-        alert("Credenciales incorrectas");
-      }
-    } catch (error) {
-      console.error("Error al iniciar sesión", error);
-    }
-  };
+ const {values, handleChange, handleLogin} = useLogin();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-100 to-red-100">
@@ -35,16 +13,19 @@ const Login = () => {
         <input
           className="w-full border border-gray-300 rounded px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Correo"
-          value={correo}
-          onChange={(e) => setCorreo(e.target.value)}
+          name="correo"
+          type="email"
+          value={values.correo}
+          onChange={handleChange}
         />
 
         <input
           className="w-full border border-gray-300 rounded px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
           type="password"
           placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          value={values.password}
+          onChange={handleChange}
         />
 
         <button
