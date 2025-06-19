@@ -1,5 +1,6 @@
-import './button.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import './button.css';
 
 function Button({ prevUrl, nextUrl }) {
   const navigate = useNavigate();
@@ -33,5 +34,10 @@ function Button({ prevUrl, nextUrl }) {
     </div>
   );
 }
+
+Button.propTypes = {
+  prevUrl: PropTypes.string,
+  nextUrl: PropTypes.string,
+};
 
 export default Button;
