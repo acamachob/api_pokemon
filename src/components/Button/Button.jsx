@@ -4,19 +4,17 @@ import './button.css';
 
 function Button({ prevUrl, nextUrl }) {
   const navigate = useNavigate();
-  const { pageNumber } = useParams();
-  const paginaActual = parseInt(pageNumber) || 1;
+  const { page } = useParams();
+  const paginaActual = parseInt(page) || 1;
 
   const irAAnterior = () => {
     if (paginaActual > 1) {
-      const nuevaPagina = paginaActual - 1;
-      navigate(`/${nuevaPagina}`);
+      navigate(`/${paginaActual - 1}`);
     }
   };
 
   const irASiguiente = () => {
-    const nuevaPagina = paginaActual + 1;
-    navigate(`/${nuevaPagina}`);
+    navigate(`/${paginaActual + 1}`);
   };
 
   return (

@@ -7,13 +7,13 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-100 to-red-100">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md flex flex-col items-center">
-        <img src="/public/logo_poke.png" alt="Logo" className="w-30 h-30 mb-4" />
+        <img src="/logo_poke.png" alt="Logo" className="w-30 h-30 mb-4" />
         <h1 className="text-3xl font-bold text-gray-700 mb-6">Iniciar Sesión</h1>
 
         <input
           className="w-full border border-gray-300 rounded px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Correo"
-          name="correo"
+          name="email"
           type="email"
           value={values.correo}
           onChange={handleChange}
@@ -22,7 +22,7 @@ const Login = () => {
         <input
           className="w-full border border-gray-300 rounded px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
           type="password"
-          placeholder="Contraseña"
+          placeholder="password"
           name="password"
           value={values.password}
           onChange={handleChange}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const useLogin = () => {
   const [values, setValues] = useState({
-    correo: "",
+    email: "",
     password: "",
   });
 
@@ -24,7 +24,7 @@ const useLogin = () => {
       );
       const users = await response.json();
       const user = users.find(
-        (u) => u.correo === values.correo && u.contraseña === values.password
+        (u) => u.email === values.email && u.password === values.password
       );
       if (user) {
         localStorage.setItem("auth", JSON.stringify(user));
