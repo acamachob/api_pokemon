@@ -4,8 +4,8 @@ import { FiArrowLeft } from "react-icons/fi";
 
 
 const RecoverPassword = () => {
-  const [correo, setCorreo] = useState("");
-  const [nuevaContraseña, setNuevaContraseña] = useState("");
+  const [email, setEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const navigate = useNavigate();
 
   const handleReset = async () => {
@@ -14,7 +14,7 @@ const RecoverPassword = () => {
         "https://68519cf68612b47a2c0ab990.mockapi.io/pokeusers/v1/users"
       );
       const users = await response.json();
-      const user = users.find((u) => u.correo === correo);
+      const user = users.find((u) => u.email === email);
 
       if (user) {
         await fetch(
@@ -22,7 +22,7 @@ const RecoverPassword = () => {
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...user, contraseña: nuevaContraseña }),
+            body: JSON.stringify({ ...user, password: newPassword}),
           }
         );
         alert("Contraseña actualizada");
@@ -52,15 +52,15 @@ const RecoverPassword = () => {
         <input
           className="w-full border border-gray-300 rounded px-4 py-2 mb-4"
           placeholder="Correo"
-          value={correo}
-          onChange={(e) => setCorreo(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="w-full border border-gray-300 rounded px-4 py-2 mb-4"
           type="password"
           placeholder="Nueva Contraseña"
-          value={nuevaContraseña}
-          onChange={(e) => setNuevaContraseña(e.target.value)}
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
         />
 
         <button

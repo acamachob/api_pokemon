@@ -6,7 +6,7 @@ import RecoverPassword from "./pages/RecoverPassword/RecoverPassword";
 import PokemonPage from "./views/PokemonPage/PokemonPage";
 import GetUser from "./pages/GetUser/GetUser";
 import EditUser from "./pages/EditUser/EditUser";
-import PokemonDetail from './views/PokemonDetail/PokemonDetail';
+import PokemonDetail from "./views/PokemonDetail/PokemonDetail";
 
 const PrivateRoute = ({ children }) => {
   const user = JSON.parse(localStorage.getItem("auth"));
@@ -23,14 +23,54 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/recover" element={<RecoverPassword />} />
+
+         <Route
+        path="/usuarios"
+        element={
+          <PrivateRoute>
+            <GetUser />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/edituser/:id"
+        element={
+          <PrivateRoute>
+            <EditUser />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/pokemon"
+        element={
+          <PrivateRoute>
+            <PokemonPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/pokemon/:id"
+        element={
+          <PrivateRoute>
+            <PokemonDetail />
+          </PrivateRoute>
+        }
+      />
       <Route path="/getuser" element={<GetUser />} />
-      <Route path="/edituser" element={<EditUser />} />
       <Route path="/pokemon/:id" element={<PokemonDetail />} />
       <Route
         path="/:page"
         element={
           <PrivateRoute>
             <PokemonPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/edituser/:id"
+        element={
+          <PrivateRoute>
+            <EditUser />
           </PrivateRoute>
         }
       />

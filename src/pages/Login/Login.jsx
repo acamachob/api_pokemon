@@ -15,7 +15,7 @@ const Login = () => {
           placeholder="Correo"
           name="email"
           type="email"
-          value={values.correo}
+          value={values.email}
           onChange={handleChange}
         />
 
