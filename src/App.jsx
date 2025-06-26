@@ -24,59 +24,45 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/recover" element={<RecoverPassword />} />
 
-         <Route
+    <Route
         path="/usuarios"
         element={
-          <PrivateRoute>
+        <PrivateRoute>
             <GetUser />
-          </PrivateRoute>
+        </PrivateRoute>
         }
-      />
-      <Route
+    />
+
+    <Route
         path="/edituser/:id"
         element={
-          <PrivateRoute>
+        <PrivateRoute>
             <EditUser />
-          </PrivateRoute>
+        </PrivateRoute>
         }
-      />
-      <Route
+    />
+
+    <Route
         path="/pokemon"
         element={
-          <PrivateRoute>
+        <PrivateRoute>
             <PokemonPage />
-          </PrivateRoute>
+        </PrivateRoute>
         }
-      />
-      <Route
+    />
+
+    <Route
         path="/pokemon/:id"
         element={
-          <PrivateRoute>
+        <PrivateRoute>
             <PokemonDetail />
-          </PrivateRoute>
+        </PrivateRoute>
         }
-      />
-      <Route path="/getuser" element={<GetUser />} />
-      <Route path="/pokemon/:id" element={<PokemonDetail />} />
-      <Route
-        path="/:page"
-        element={
-          <PrivateRoute>
-            <PokemonPage />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/edituser/:id"
-        element={
-          <PrivateRoute>
-            <EditUser />
-          </PrivateRoute>
-        }
-      />
-      <Route path="*" element={<Navigate to="/login" />} />
+    />
+
+    <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
-  );
+);
 }
 
 export default App;
