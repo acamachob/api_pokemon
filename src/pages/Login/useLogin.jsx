@@ -28,7 +28,7 @@ const useLogin = () => {
       );
       if (user) {
         localStorage.setItem("auth", JSON.stringify(user));
-        navigate("/1");
+        navigate("/pokemon");
       } else {
         alert("Credenciales incorrectas");
       }

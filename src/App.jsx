@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import RecoverPassword from "./pages/RecoverPassword/RecoverPassword";
@@ -7,62 +7,57 @@ import PokemonPage from "./views/PokemonPage/PokemonPage";
 import GetUser from "./pages/GetUser/GetUser";
 import EditUser from "./pages/EditUser/EditUser";
 import PokemonDetail from "./views/PokemonDetail/PokemonDetail";
+import PrivateRoute from "./Routes/PrivateRoute";
+import NavigationBar from "./components/NavigationBar/NavigationBar";
+import Berries from "./views/Berries/Berries";
+import PCBill from "./views/PcBill/PcBill";
+import Profile from "./views/Profile/Profile";
+import PCDeBill from "./pages/PCDeBill/PCDeBill";
 
-const PrivateRoute = ({ children }) => {
-  const user = JSON.parse(localStorage.getItem("auth"));
-  return user ? children : <Navigate to="/login" />;
-};
 
-PrivateRoute.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 function App() {
+  const location = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("auth")
+  );
+
+  useEffect(() => {
+    const user = localStorage.getItem("auth");
+    setIsAuthenticated(!!user);
+  }, [location]);
+
+  const noNavbarRoutes = ["/login", "/register", "/recover"];
+  const hideNavbar = noNavbarRoutes.includes(location.pathname);
+
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/recover" element={<RecoverPassword />} />
+    <>
+      {!hideNavbar && isAuthenticated && <NavigationBar />}
 
-    <Route
-        path="/usuarios"
-        element={
-        <PrivateRoute>
-            <GetUser />
-        </PrivateRoute>
-        }
-    />
+      <Routes>
+        {/* Estas son las rutas públicas */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/recover" element={<RecoverPassword />} />
 
-    <Route
-        path="/edituser/:id"
-        element={
-        <PrivateRoute>
-            <EditUser />
-        </PrivateRoute>
-        }
-    />
+        {/* Estas son las rutas privadas */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/usuarios" element={<GetUser />} />
+          <Route path="/edituser/:id" element={<EditUser />} />
+          <Route path="/pokemon" element={<PokemonPage />} />
+          <Route path="/pokemon/:id" element={<PokemonDetail />} />
+          <Route path="/:page" element={<PokemonPage />} />
+          <Route path="/berries" element={<Berries />} />
+          <Route path="/pc" element={<PCBill />} />
+          <Route path="/perfil" element={<Profile />} />
+          <Route path="/pc" element={<PCDeBill />} />
+        </Route>
 
-    <Route
-        path="/pokemon"
-        element={
-        <PrivateRoute>
-            <PokemonPage />
-        </PrivateRoute>
-        }
-    />
-
-    <Route
-        path="/pokemon/:id"
-        element={
-        <PrivateRoute>
-            <PokemonDetail />
-        </PrivateRoute>
-        }
-    />
-
-    <Route path="*" element={<Navigate to="/login" />} />
-    </Routes>
-);
+        {/* Redirección al login */}
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;

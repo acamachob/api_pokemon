@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PokeCard from "../../components/Card/PokeCard";
 import Button from "../../components/Button/Button";
+import TeamBar from "../../components/TeamBar/TeamBar"; 
 
 function PokemonPage() {
   const { page } = useParams();
@@ -48,6 +49,9 @@ function PokemonPage() {
           />
         </div>
       </div>
+
+      {/*Esta es la barra flotante*/}
+      <TeamBar />
     </>
   );
 }
